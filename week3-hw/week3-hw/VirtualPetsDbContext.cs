@@ -8,7 +8,7 @@ public class VirtualPetsDbContext : DbContext
     {
 
     }
-    public DbSet<Action> Actions { get; set; }
+    public DbSet<Food> Actions { get; set; }
     public DbSet<Food> Foods { get; set; }
     public DbSet<HealthType> HealthTypes { get; set; }
     public DbSet<Pet> Pets { get; set; }

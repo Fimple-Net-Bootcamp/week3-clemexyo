@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using week3_hw;
@@ -11,9 +12,11 @@ using week3_hw;
 namespace week3_hw.Migrations
 {
     [DbContext(typeof(VirtualPetsDbContext))]
-    partial class VirtualPetsDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231214170851_fix")]
+    partial class fix
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
