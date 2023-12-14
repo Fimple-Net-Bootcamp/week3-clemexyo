@@ -4,11 +4,11 @@ using week3_hw.Models;
 namespace week3_hw.Controllers;
 
 [ApiController]
-[Route("/api/v1/foods")]
-public class FoodController : ControllerBase
+[Route("/api/v1/healthtype")]
+public class HealthTypeController : ControllerBase
 {
     private readonly VirtualPetsDbContext _dbContext;
-    public FoodController(VirtualPetsDbContext dbContext)
+    public HealthTypeController(VirtualPetsDbContext dbContext)
     {
         _dbContext = dbContext;
     }
@@ -16,33 +16,33 @@ public class FoodController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> Create([FromBody] string name)
     {
-        var food = new Food(name);
+        var healthType = new HealthType(name);
 
-        _dbContext.Foods.Add(food);
+        _dbContext.HealthTypes.Add(healthType);
         await _dbContext.SaveChangesAsync();
 
-        return CreatedAtAction(nameof(GetById), new { id = food.Id }, food);
+        return CreatedAtAction(nameof(GetById), new { id = healthType.Id }, healthType);
     }
 
     [HttpGet]
     public IActionResult GetAll()
     {
-        var foods = _dbContext.Foods.ToList();
-        if (!foods.Any())
+        var types = _dbContext.Foods.ToList();
+        if (!types.Any())
         {
             return NotFound();
         }
-        return Ok(foods);
+        return Ok(types);
     }
 
     [HttpGet("{id}")]
     public IActionResult GetById(int id)
     {
-        var food = _dbContext.Foods.Where(x => x.Id == id).FirstOrDefault();
-        if (food is null)
+        var healthType = _dbContext.HealthTypes.Where(x => x.Id == id).FirstOrDefault();
+        if (healthType is null)
         {
             return NotFound();
         }
-        return Ok(food);
+        return Ok(healthType);
     }
 }
