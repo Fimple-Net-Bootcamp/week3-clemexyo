@@ -4,11 +4,11 @@ using week3_hw.Models;
 namespace week3_hw.Controllers;
 
 [ApiController]
-[Route("/api/v1/actions")]
-public class ActionController : ControllerBase
+[Route("/api/v1/activities")]
+public class ActivityController : ControllerBase
 {
     private readonly VirtualPetsDbContext _dbContext;
-    public ActionController(VirtualPetsDbContext dbContext)
+    public ActivityController(VirtualPetsDbContext dbContext)
     {
         _dbContext = dbContext;
     }
@@ -16,9 +16,9 @@ public class ActionController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> Create([FromBody] string name)
     {
-        var action = new Models.Food(name);
+        var action = new Activity(name);
 
-        _dbContext.Actions.Add(action);
+        _dbContext.Activities.Add(action);
         await _dbContext.SaveChangesAsync();
 
         return CreatedAtAction(nameof(GetById), new { id = action.Id }, action);
@@ -27,7 +27,7 @@ public class ActionController : ControllerBase
     [HttpGet("{id}")]
     public IActionResult GetById(int id)
     {
-        var action = _dbContext.Actions.Where(x => x.Id == id).FirstOrDefault();
+        var action = _dbContext.Activities.Where(x => x.Id == id).FirstOrDefault();
         if (action is null)
         {
             return NotFound();

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using week3_hw.Models;
+using week3_hw.Requests;
 
 
 namespace week3_hw.Controllers;
@@ -37,14 +38,15 @@ public class UserController : ControllerBase
     }
 
     [HttpPut("{id}")]
-    public async Task<IActionResult> Update(int id, string userName)
+    public async Task<IActionResult> Update(int id, UpdateUserRequest request)
     {
+        User updated = new User(request.Name, request.Pets);
         var current = _dbContext.Users.Where(x => x.Id == id).FirstOrDefault();
         if (current is null)
         {
             return NotFound();
         }
-        current.Name = userName;
+        current = updated;
 
         await _dbContext.SaveChangesAsync();
         return Ok(current);

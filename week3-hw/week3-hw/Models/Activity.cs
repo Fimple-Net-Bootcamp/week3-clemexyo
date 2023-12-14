@@ -2,9 +2,9 @@
 
 namespace week3_hw.Models;
 
-public class Action
+public class Activity
 {
-    public Action(string name)
+    public Activity(string name)
     {
         Name = name;
         CreatedAt = DateTime.UtcNow;
