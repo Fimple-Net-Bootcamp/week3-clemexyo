@@ -6,6 +6,6 @@ public abstract class Entity<T>
 {
     [Key]
     public T Id { get; set;  }
-    public DateTime CreatedAt { get; }
-    public DateTime UpdatedAt { get; }
+    public DateTime CreatedAt { get; set; }
+    public DateTime UpdatedAt { get; set; }
 }
