@@ -44,7 +44,6 @@ public class UserController : ControllerBase
         {
             return NotFound();
         }
-        current.UpdatedAt = DateTime.Now;
         current.Name = userName;
 
         await _dbContext.SaveChangesAsync();

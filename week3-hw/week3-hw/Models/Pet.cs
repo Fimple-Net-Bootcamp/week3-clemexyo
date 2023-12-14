@@ -4,6 +4,12 @@ namespace week3_hw.Models;
 
 public class Pet
 {
+    public Pet(string name)
+    {
+        Name = name;
+        CreatedAt = DateTime.UtcNow;
+    }
+
     [Key]
     public int Id { get; set; }
     public string Name { get; set; }

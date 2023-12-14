@@ -4,6 +4,11 @@ namespace week3_hw.Models;
 
 public class HealthType 
 {
+    public HealthType(string name)
+    {
+        Name = name;
+        CreatedAt = DateTime.UtcNow;
+    }
     [Key]
     public int Id { get; set; }
     public string Name { get; set; }
