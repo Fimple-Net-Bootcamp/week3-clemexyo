@@ -1,6 +1,5 @@
 using Microsoft.EntityFrameworkCore;
 using week3_hw;
-using week3_hw.Services.UserService;
 
 var builder = WebApplication.CreateBuilder(args);
 {

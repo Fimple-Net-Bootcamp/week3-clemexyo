@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using week3_hw.Models;
-using week3_hw.Services.UserService;
 
 
 namespace week3_hw.Controllers;

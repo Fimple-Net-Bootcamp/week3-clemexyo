@@ -1,6 +1,11 @@
-﻿namespace week3_hw.Models;
+﻿using System.ComponentModel.DataAnnotations;
 
-public class Food : Entity<int>
+namespace week3_hw.Models;
+
+public class Food 
 {
+    [Key]
+    public int Id { get; set; }
     public string Name { get; set; }
+    public DateTime CreatedAt { get; set; }
 }
