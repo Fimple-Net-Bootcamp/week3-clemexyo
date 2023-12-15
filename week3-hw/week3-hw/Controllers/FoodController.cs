@@ -24,6 +24,26 @@ public class FoodController : ControllerBase
         return CreatedAtAction(nameof(GetById), new { id = food.Id }, food);
     }
 
+    [HttpPost("{petId}")]
+    public async Task<IActionResult> Feed(int petId, [FromBody] int foodId)
+    {
+        var pet = _dbContext.Pets.Where(x => x.Id == petId).FirstOrDefault();
+        if (pet is null)
+        {
+            return NotFound();
+        }
+
+        var food = _dbContext.Foods.Where(x => x.Id == foodId).FirstOrDefault();
+        if (food is null)
+        {
+            return NotFound();
+        }
+        pet.Foods.Add(food);
+        await _dbContext.SaveChangesAsync();
+
+        return Ok(pet);
+    }
+
     [HttpGet]
     public IActionResult GetAll()
     {

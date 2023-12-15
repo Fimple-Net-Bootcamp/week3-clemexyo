@@ -24,8 +24,8 @@ public class ActivityController : ControllerBase
         return CreatedAtAction(nameof(GetById), new { id = action.Id }, action);
     }
 
-    [HttpGet("{petId}")]
-    public IActionResult GetById(int petId)
+    [HttpGet("/activity/{petId}")]
+    public IActionResult GetPetActivities(int petId)
     {
         var pet = _dbContext.Pets.Where(x => x.Id == petId).FirstOrDefault();
         if (pet is null)
@@ -33,5 +33,16 @@ public class ActivityController : ControllerBase
             return NotFound();
         }
         return Ok(pet.Activities);
+    }
+
+    [HttpGet("{id}")]
+    public IActionResult GetById(int id)
+    {
+        var activity = _dbContext.Activities.Where(x => x.Id == id).FirstOrDefault();
+        if (activity is null)
+        {
+            return NotFound();
+        }
+        return Ok(activity);
     }
 }
