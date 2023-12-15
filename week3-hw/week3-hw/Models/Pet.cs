@@ -10,6 +10,14 @@ public class Pet
         CreatedAt = DateTime.UtcNow;
     }
 
+    public Pet(string name, HealthType? healthType, List<Activity>? activities, List<Food>? foods) : this(name)
+    {
+        HealthType = healthType;
+        Activities = activities;
+        Foods = foods;
+        CreatedAt = DateTime.UtcNow;
+    }
+
     [Key]
     public int Id { get; set; }
     public string Name { get; set; }
