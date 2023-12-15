@@ -24,14 +24,14 @@ public class ActivityController : ControllerBase
         return CreatedAtAction(nameof(GetById), new { id = action.Id }, action);
     }
 
-    [HttpGet("{id}")]
-    public IActionResult GetById(int id)
+    [HttpGet("{petId}")]
+    public IActionResult GetById(int petId)
     {
-        var action = _dbContext.Activities.Where(x => x.Id == id).FirstOrDefault();
-        if (action is null)
+        var pet = _dbContext.Pets.Where(x => x.Id == petId).FirstOrDefault();
+        if (pet is null)
         {
             return NotFound();
         }
-        return Ok(action);
+        return Ok(pet.Activities);
     }
 }
