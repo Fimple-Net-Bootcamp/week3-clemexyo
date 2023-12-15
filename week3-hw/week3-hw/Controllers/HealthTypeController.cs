@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using week3_hw.Models;
+using week3_hw.Requests;
 
 namespace week3_hw.Controllers;
 
@@ -36,13 +37,27 @@ public class HealthTypeController : ControllerBase
     }
 
     [HttpGet("{id}")]
-    public IActionResult GetById(int id)
+    public IActionResult GetById(int petId)
     {
-        var healthType = _dbContext.HealthTypes.Where(x => x.Id == id).FirstOrDefault();
-        if (healthType is null)
+        var pet = _dbContext.Pets.Where(x => x.Id == petId).FirstOrDefault();
+        if (pet is null)
         {
             return NotFound();
         }
-        return Ok(healthType);
+        return Ok(pet.HealthType);
+    }
+
+    [HttpPatch("{petId}")]
+    public async Task<IActionResult> UpdatePetHealthType(int petId, UpdatePetHealthTypeRequest request)
+    {
+        var pet = _dbContext.Pets.Where(x => x.Id == petId).FirstOrDefault();
+        if (pet is null)
+        {
+            return NotFound();
+        }
+
+        pet.HealthType = request.HealthType;   
+        await _dbContext.SaveChangesAsync();
+        return Ok(pet.HealthType);
     }
 }
